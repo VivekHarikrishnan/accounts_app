@@ -7,6 +7,13 @@ gem 'rails', '3.2.6'
 
 gem 'mysql2'
 
+group :development, :test do
+  gem 'haml-rails'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

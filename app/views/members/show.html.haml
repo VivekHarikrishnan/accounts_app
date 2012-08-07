@@ -1,0 +1,16 @@
+%h2== #{@member.first_name} #{@member.last_name}
+%table{border: "1"}
+    %thead        
+        - @columns.each do |column|
+            %td= column
+    %tbody
+        %tr
+            %td= @member.first_name
+            %td= @member.last_name
+            %td= @member.formatted_dob
+            %td= @member.formatted_doj
+            %td= @member.formatted_qualification
+            %td= @member.address
+            %td= link_to "Edit Details", edit_member_path
+            %td= link_to "Delete Member", @member, method: :delete, confirm: "Are you sure to delete?\n#{@member}"
+.list_members= link_to "View all members", members_path

@@ -1,0 +1,5 @@
+%h1 Members
+%h3= link_to "Create New", new_member_path
+%ul
+    - @members.each do |member|
+        %li[member]= h(link_to "#{member.first_name} #{member.last_name}", member)

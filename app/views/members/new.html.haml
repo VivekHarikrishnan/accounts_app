@@ -1,0 +1,26 @@
+%link{type: "text/css", href: "css/themename/jquery-ui-1.8.22.custom.css", rel: "Stylesheet"}
+%script{type: "text/javascript", src: "jquery-ui-1.8.22.custom/js/jquery-1.4.4.min.js"}
+%script{type: "text/javascript", src: "jquery-ui-1.8.22.customjs/jquery-ui-1.8.22.custom.min.js"}
+%h1 Create New Member
+- end_year = Time.now.year
+.new_member
+    = form_for @member do |f|
+        .error_messages
+            %ul
+                - @member.errors.full_messages.each do |message|
+                    %li= message
+        %p= f.label :first_name
+        %p= f.text_field :first_name
+        %p= f.label :last_name
+        %p= f.text_field :last_name
+        %p= f.label :date_of_birth
+        %p= f.date_select :date_of_birth, order: [:day, :month, :year], start_year: 1950, end_year: end_year
+        %p= f.label :date_of_join
+        %p= f.date_select :date_of_join, order: [:day, :month, :year], start_year: 2011, end_year: end_year
+        %p= f.label :qualification
+        %p= f.select :qualification, options_for_select(Member::QUALIFICATIONS)
+        %p= f.label :address
+        %p= f.text_area :address, rows: "6"
+        %p
+            = f.submit "Create Member"
+            = link_to "Cancel", members_path, class: "cancel_button"
