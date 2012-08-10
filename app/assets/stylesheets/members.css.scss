@@ -1,3 +1,206 @@
 // Place all the styles related to the members controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$bg_color: darkCyan;
+
+body{
+    color: "#000000";
+    background-color: "white";
+    font-family: sans-serif;
+}
+
+div.header {
+    background-color: $bg_color;
+    color: white;
+    font-size: 2em;
+    padding: 15px 0 0;
+    position: relative;
+    text-align: center;
+    margin: -10px;
+}
+
+div#home_page {
+    background-color: red;
+}
+
+h3 {    
+    a {
+        color: $bg_color;
+        text-decoration: none;
+        &:hover{
+            color: #21610B;
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #0066CC;
+    &:hover {
+        color: #003300;
+    }
+}
+
+a.delete {
+    &:hover{
+        color: #B43104;
+    }
+}
+
+span#logout {
+    float: right;
+    margin-top: -40px;
+    padding-right: 11%;
+    font-size: 14px;
+    a {
+        text-decoration: none;
+        color: white;
+        &:hover {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    }
+}
+
+ul {
+    list-style-type: none;    
+    li {
+        padding-left: 30px;
+        padding-bottom: 60px;
+        a {
+            text-decoration: none;
+            color: #0066CC;
+            &:hover {
+                color: #003300;
+            }
+        }
+
+        &.show_member_column {
+            display: inline;
+        }
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;    
+    td {
+       padding: 10px;
+       border: 1px solid $bg_color;
+    }
+    thead {
+        color: white;
+        tr {
+            background-color: $bg_color;
+        }
+    }
+}
+
+td.column_name {
+    color: $bg_color;
+    text-align: right;
+}
+
+td.seperator {
+    color: $bg_color;
+    text-align: center;
+}
+
+tr.odd_rows {
+    background-color: white;
+}
+
+.list_members {
+    padding: 10px;
+    float: right;
+    font-size: 1.2em;
+}
+
+div.content {
+    background-color: lightCyan;
+    float: left;
+    left: 10%;
+    position: relative;
+    width: 80%;
+}
+
+p {
+    color: $bg_color;
+    input, textarea {
+        &:focus {
+            border: 2px solid $bg_color;
+            border-radius: 3px;
+        }
+    }
+}
+
+.field_with_errors {
+    color: #CC0000;
+    input, textarea, select {
+        border: 2px solid #CC0000;
+        border-radius: 3px;
+    }
+}
+
+.error_messages {
+    ul {
+        li {
+            color: #CC0000;
+            font-size: 0.8em;
+            list-style: circle outside none;
+            padding-left: 10px;
+            padding-bottom: 25px;
+        }
+    }
+}
+
+.new_member, .edit_member {
+    padding-left: 30px;
+}
+
+.cancel_button {
+    padding-left: 10px;
+}
+
+// tabs implementation
+ul.tabnav {
+    text-align: left;
+    margin: 0.8em 0 0.8em 0;
+    font-size: 13px;
+    font-weight: bold;
+    border-bottom: 1px solid $bg_color;
+    list-style-type: none;
+    padding: 3px 10px 3px 10px;
+    li {
+        display:inline;
+        &.active {
+            a {
+                background-color: #fff;
+                color: $bg_color;
+                position: relative;
+                top: 1px;
+                padding-top: 4px;
+            }
+        }        
+        a {
+            padding: 3px 4px 4px;
+            border: 1px solid $bg_color;
+            background-color: $bg_color;
+            color: #FFF;
+            margin-right: 0px;
+            text-decoration: none;
+            border-bottom: none;
+        }
+    }
+    a {
+        &:hover {
+            background: lightCyan;
+            color: #000;
+        }
+    }
+}
+
+select#id {
+    margin-bottom: 5px;
+}
