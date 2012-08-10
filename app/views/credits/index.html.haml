@@ -1,0 +1,18 @@
+- provide(:header_title, @member)
+.content
+    = render partial: "members/inline_tab", locals: { member: @member }    
+    %table
+        %thead
+            %tr
+                %td Date of transaction
+                %td Amount
+        %tbody
+            - @credits.each_with_index do |credit, index|
+                - if index % 2 == 0
+                    %tr
+                        %td= credit.formatted_dot
+                        %td= credit.amount
+                - else
+                    %tr.odd_rows
+                        %td= credit.formatted_dot
+                        %td= credit.amount
