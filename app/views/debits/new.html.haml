@@ -1,0 +1,18 @@
+- provide(:header_title, "Debit transaction")
+.content
+    - end_year = Time.now.year
+    .new_member
+        = form_for @debit do |f|
+            .error_messages
+                %ul
+                    - @debit.errors.full_messages.each do |message|
+                        %li= message
+            %p= f.label :member
+            %p= f.select :member_id, @members, prompt: "Select member name"
+            %p= f.label :amount
+            %p= f.text_field :amount, placeholder: "Enter amount to be withdrawn"
+            %p= f.label :date_of_transaction
+            %p= f.date_select :date_of_transaction, order: [:day, :month, :year], start_year: 2011, end_year: end_year
+            %p
+                = f.submit "Make Transaction"
+                = link_to "Cancel", members_path, class: "cancel_button"
