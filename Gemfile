@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://gems.github.com'
 
 gem 'rails', '3.2.6'
 
@@ -6,10 +7,8 @@ gem 'rails', '3.2.6'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-
-group :development, :test do
-  gem 'haml-rails'
-end
+gem 'tabs_on_rails'
+gem 'haml-rails'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -30,7 +29,7 @@ end
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
