@@ -1,0 +1,9 @@
+.header Welcome
+.content{style: "background-color: lightCyan; margin: 10px; position: relative;"}
+    .edit_member
+        = form_tag("/signin") do
+            %p Username
+            %p= text_field_tag :username
+            %p Password
+            %p= password_field_tag :password
+            %p= submit_tag "Signin"

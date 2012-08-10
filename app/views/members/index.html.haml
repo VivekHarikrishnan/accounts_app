@@ -1,5 +1,7 @@
-%h1 Members
-%h3= link_to "Create New", new_member_path
-%ul
-    - @members.each do |member|
-        %li[member]= h(link_to "#{member.first_name} #{member.last_name}", member)
+- provide(:header_title, "List members")
+.content
+    %ul
+        - @members.each do |member|
+            %li[member]
+                = h(link_to "#{member.first_name} #{member.last_name}", member)
+                == #{CURRENCY} #{member.balance_amount}

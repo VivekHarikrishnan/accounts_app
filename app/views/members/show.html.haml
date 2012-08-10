@@ -1,16 +1,28 @@
-%h2== #{@member.first_name} #{@member.last_name}
-%table{border: "1"}
-    %thead        
-        - @columns.each do |column|
-            %td= column
-    %tbody
-        %tr
-            %td= @member.first_name
-            %td= @member.last_name
-            %td= @member.formatted_dob
-            %td= @member.formatted_doj
-            %td= @member.formatted_qualification
-            %td= @member.address
-            %td= link_to "Edit Details", edit_member_path
-            %td= link_to "Delete Member", @member, method: :delete, confirm: "Are you sure to delete?\n#{@member}"
-.list_members= link_to "View all members", members_path
+- provide(:header_title, "#{@member.first_name} #{@member.last_name}")
+.content
+    = render partial: "members/inline_tab", locals: { member: @member }
+    = form_tag(@member) do
+        = select_tag :id, options_for_select(@members), prompt: "-- Select member --", onChange: "window.location.replace('/members/'+this.value)";
+    #show_member_details
+        %table
+            %thead
+                %tr
+                    %td First name
+                    %td Last name
+                    %td Date of birth
+                    %td Date of join
+                    %td Qualification
+                    %td Address
+                    %td
+                    %td
+            %tbody
+                %tr
+                    %td= @member.first_name
+                    %td= @member.last_name
+                    %td= @member.formatted_dob
+                    %td= @member.formatted_doj
+                    %td= @member.formatted_qualification
+                    %td= @member.address
+                    %td.show_member_column= link_to "Edit Details", edit_member_path, class: "edit"
+                    %td= link_to "Delete Member", @member, method: :delete, |
+                                    class: "delete", confirm: "Are you sure to delete?\n#{@member}"

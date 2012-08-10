@@ -8,8 +8,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= flash[:notice] %>
+<div class="header">
+    <%= header_title(yield(:header_title)) %>
+  <div>
+    <% current_member %>
+    <% if signed_in? and controller_name != "admin" %>
+    <span id="logout">
+      <%= current_member.first_name.capitalize %> <%= link_to "Logout >> ", signout_path %>
+    </span>
+      <%= tabs_tag open_tabs: { class: "tabnav"} do |tab|  %>
+        <%= tab.home "Home", home_path %>
+        <%= tab.list_members "List Members", members_path %>
+        <%= tab.new_member "Create new member", new_member_path %>
+        <%= tab.credit_amount "Credit amount", new_credit_path %>
+        <%= tab.debit_amount "Debit amount", new_debit_path %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="notice content">
+  <%= flash[:notice] %>  
+</div>
 <%= yield %>
-
 </body>
 </html>

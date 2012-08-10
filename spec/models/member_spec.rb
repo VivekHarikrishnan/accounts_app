@@ -12,6 +12,11 @@ describe Member do
   it { should respond_to(:date_of_join)}
   it { should respond_to(:qualification)}
   it { should respond_to(:address)}
+  it { should respond_to(:password_digest)}
+  it { should respond_to(:password)}
+  it { should respond_to(:password_confirmation)}
+  it { should respond_to(:credits)}
+  it { should respond_to(:debits)}
   it do
     pending "Yet to implement photo uploading feature"
     should respond_to(:photo)
@@ -23,7 +28,8 @@ describe Member do
       @valid_attributes = {
         first_name: "fname", last_name: "lname",
         date_of_birth: "1989-03-13", date_of_join: "2012-08-15",
-        qualification: Member::QUALIFICATIONS["B.Com"], address: "address for \n communication"
+        qualification: Member::QUALIFICATIONS["B.Com"], address: "address for \n communication",
+        password: "password", password_confirmation: "password"
       }
     end
 
@@ -35,7 +41,7 @@ describe Member do
     end
 
     it "should not allow to save a member if last name is already taken" do
-       member1 = Member.create(@valid_attributes)
+       member1 = Member.create(@valid_attributes)       
        member1.should be_valid
        member2 = Member.create(@valid_attributes)
        member2.should_not be_valid

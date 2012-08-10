@@ -1,5 +1,21 @@
 AccountsApp::Application.routes.draw do
+  get "debits/new"
+
+  get "debits/create"
+
+  get "debits/index"
+
+  root to: "admin#new"
   resources :members
+  resources :admin, only: [:new, :create, :destroy]
+  resources :credits, only: [:new, :create, :index]
+  resources :debits, only: [:new, :create, :index]
+
+  match "/signin", to: "admin#create"
+  match "/signout", to: "admin#destroy"
+
+  match "/home", to: "members#home"
+#  match "/credits/:id", to: "credits#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

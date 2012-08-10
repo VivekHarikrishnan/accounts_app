@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806154655) do
+ActiveRecord::Schema.define(:version => 20120810215301) do
+
+  create_table "credits", :force => true do |t|
+    t.integer  "member_id"
+    t.date     "date_of_transaction"
+    t.decimal  "amount",              :precision => 10, :scale => 0
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
+
+  create_table "debits", :force => true do |t|
+    t.integer  "member_id"
+    t.decimal  "amount",              :precision => 10, :scale => 0
+    t.date     "date_of_transaction"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+  end
 
   create_table "members", :force => true do |t|
     t.string   "first_name"
@@ -20,8 +36,17 @@ ActiveRecord::Schema.define(:version => 20120806154655) do
     t.date     "date_of_join"
     t.string   "qualification"
     t.text     "address"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "password_digest"
+  end
+
+  create_table "repayments", :force => true do |t|
+    t.integer  "member_id"
+    t.decimal  "amount",              :precision => 10, :scale => 0
+    t.date     "date_of_transaction"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
 end
