@@ -16,6 +16,6 @@ class Debit < ActiveRecord::Base
   def debit_amount_with_credit_amount
     total_amount_creditted = Credit.total_amount
 
-    errors.add(:amount, "is invalid. No enough amount to debit") if amount and amount > total_amount_creditted
+    errors.add(:amount, "is invalid. No enough amount to debit (available amount: #{CURRENCY} #{Credit.total_amount})") if amount and amount > total_amount_creditted
   end
 end

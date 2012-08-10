@@ -1,4 +1,10 @@
 AccountsApp::Application.routes.draw do
+  get "repayments/new"
+
+  get "repayments/create"
+
+  get "repayments/index"
+
   get "debits/new"
 
   get "debits/create"
@@ -10,6 +16,7 @@ AccountsApp::Application.routes.draw do
   resources :admin, only: [:new, :create, :destroy]
   resources :credits, only: [:new, :create, :index]
   resources :debits, only: [:new, :create, :index]
+  resources :repayments, only: [:new, :create, :index]
 
   match "/signin", to: "admin#create"
   match "/signout", to: "admin#destroy"

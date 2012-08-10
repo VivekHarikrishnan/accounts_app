@@ -2,6 +2,7 @@ class MembersController < ApplicationController
   before_filter :signed_in_user, only: [:new, :edit, :destroy]
 
   def home
+    
   end
   
   def new

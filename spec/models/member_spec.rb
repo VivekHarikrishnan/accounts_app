@@ -17,6 +17,7 @@ describe Member do
   it { should respond_to(:password_confirmation)}
   it { should respond_to(:credits)}
   it { should respond_to(:debits)}
+  it { should respond_to(:repayments)}
   it do
     pending "Yet to implement photo uploading feature"
     should respond_to(:photo)
@@ -41,11 +42,11 @@ describe Member do
     end
 
     it "should not allow to save a member if last name is already taken" do
-       member1 = Member.create(@valid_attributes)       
-       member1.should be_valid
-       member2 = Member.create(@valid_attributes)
-       member2.should_not be_valid
-       member2.errors[:last_name].first.should == "has already been taken"
+      member1 = Member.create(@valid_attributes)
+      member1.should be_valid
+      member2 = Member.create(@valid_attributes)
+      member2.should_not be_valid
+      member2.errors[:last_name].first.should == "has already been taken"
     end
 
     it "should be invalid if date of birth and date of join is blank" do
@@ -79,6 +80,38 @@ describe Member do
     it "should save a member if all the attributes are valid" do
       member = Member.create(@valid_attributes)
       member.should be_valid
+    end
+  end
+
+  describe "Transaction" do
+    before do
+      @member = Member.create({ first_name: "fname", last_name: "lname",
+          date_of_birth: "1989-03-13", date_of_join: "2012-08-15",
+          qualification: Member::QUALIFICATIONS["B.Com"], address: "address for \n communication",
+          password: "password", password_confirmation: "password" })
+
+      Credit.create([{ member_id: @member.id, amount: 200, date_of_transaction: "2012-08-12"},
+          { member_id: @member.id, amount: 200, date_of_transaction: "2012-09-12"},
+          { member_id: @member.id, amount: 200, date_of_transaction: "2012-10-12"},
+          { member_id: @member.id, amount: 200, date_of_transaction: "2012-11-12"},
+          { member_id: @member.id, amount: 200, date_of_transaction: "2012-12-12"}])
+
+      Debit.create({ member_id: @member.id, amount: 500, date_of_transaction: "2012-08-12"})
+
+      Repayment.create([{ member_id: @member.id, amount: 200, date_of_transaction: "2012-08-12"},
+          { member_id: @member.id, amount: 150, date_of_transaction: "2012-09-12"}])
+    end
+    
+    it "should return sum of credits amount as 1000" do
+      @member.credit_amount.should == 1000
+    end
+
+    it "should return sum of debits amount as 500" do
+      @member.debit_amount.should == 500
+    end
+
+    it "should return amount to repay as 1000" do
+      @member.amount_to_repay.should == 150
     end
   end
   

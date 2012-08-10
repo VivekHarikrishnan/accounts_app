@@ -22,10 +22,15 @@ class Member < ActiveRecord::Base
 
   has_many :credits
   has_many :debits
+  has_many :repayments
 
   def self.authenticate(username, password)
     member = find_by_first_name(username)
     member if member and member.authenticate(password)
+  end
+
+  def self.all
+    find(:all, conditions: ["first_name != ?", "admin"], order: "first_name ASC")
   end
 
   def to_s
@@ -47,10 +52,6 @@ class Member < ActiveRecord::Base
     qualification_string
   end
 
-  def self.all
-    find(:all, conditions: ["first_name != ?", "admin"], order: "first_name ASC")
-  end
-
   def credit_amount
     total_amount = 0
     credits.collect { |c| total_amount += c.amount }
@@ -66,6 +67,17 @@ class Member < ActiveRecord::Base
   end
 
   def balance_amount
-    credit_amount - debit_amount
+    credit_amount - debit_amount + repaid_amount
+  end
+
+  def amount_to_repay
+    debit_amount - repaid_amount
+  end
+
+  def repaid_amount
+    total_amount = 0
+    repayments.collect { |c| total_amount += c.amount }
+
+    total_amount
   end
 end

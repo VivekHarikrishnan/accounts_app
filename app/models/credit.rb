@@ -14,7 +14,7 @@ class Credit < ActiveRecord::Base
 
   def self.total_amount
     amount = 0
-    find(:all).collect {|credit| amount += credit.amount}
+    Member.all.collect {|member| amount += member.credit_amount}
 
     amount
   end

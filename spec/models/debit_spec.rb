@@ -71,7 +71,7 @@ describe Debit do
     it "should not make a transaction when debit amount is greater than amount in sum of amount in Credit" do
       debit = Debit.create({ member_id: @member, amount: 600, date_of_transaction: "2012-12-12"})      
       debit.should_not be_valid
-      debit.errors[:amount].first.should == "is invalid. No enough amount to debit"
+      debit.errors[:amount].first.should == "is invalid. No enough amount to debit (available amount: #{CURRENCY} #{Credit.total_amount})"
     end
 
     it "should make a transaction if amount is less than total amount in Credit" do

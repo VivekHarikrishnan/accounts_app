@@ -1,4 +1,4 @@
-- provide(:header_title, "Debits #{@member}")
+- provide(:header_title, "Repayments #{@member}")
 .content
     = render partial: "members/inline_tab", locals: { member: @member }
     %table
@@ -7,12 +7,12 @@
                 %td Date of transaction
                 %td Amount
         %tbody
-            - @debits.each_with_index do |debit, index|
+            - @repayments.each_with_index do |repayment, index|
                 - if index % 2 == 0
                     %tr
-                        %td= debit.formatted_dot
-                        %td= debit.amount
+                        %td= repayment.formatted_dot
+                        %td= repayment.amount
                 - else
                     %tr.odd_rows
-                        %td= debit.formatted_dot
-                        %td= debit.amount
+                        %td= repayment.formatted_dot
+                        %td= repayment.amount
