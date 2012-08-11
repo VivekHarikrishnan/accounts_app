@@ -19,6 +19,8 @@
             %p= f.select :qualification, options_for_select(Member::QUALIFICATIONS)
             %p= f.label :address
             %p= f.text_area :address, rows: "6"
+            %p= f.label :select_member_photo
+            %p= f.file_field :photo
             %p
                 = f.submit "Create Member"
                 = link_to "Cancel", members_path, class: "cancel_button"

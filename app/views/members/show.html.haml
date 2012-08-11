@@ -15,6 +15,7 @@
                     %td Address
                     %td
                     %td
+                    %td
             %tbody
                 %tr
                     %td= @member.first_name
@@ -23,6 +24,7 @@
                     %td= @member.formatted_doj
                     %td= @member.formatted_qualification
                     %td= @member.address
+                    %td= image_tag @member.photo.url(:thumb)
                     %td.show_member_column= link_to "Edit Details", edit_member_path, class: "edit"
                     %td= link_to "Delete Member", @member, method: :delete, |
                                     class: "delete", confirm: "Are you sure to delete?\n#{@member}"

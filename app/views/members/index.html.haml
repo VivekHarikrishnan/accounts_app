@@ -5,3 +5,4 @@
             %li[member]
                 = h(link_to "#{member.first_name} #{member.last_name}", member)
                 == #{CURRENCY} #{member.balance_amount}
+                = image_tag(member.photo.url(:small))

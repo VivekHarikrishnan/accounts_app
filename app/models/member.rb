@@ -3,8 +3,14 @@ class Member < ActiveRecord::Base
                   "HSC" => "HSC", "B.A" => "BA", "M.A" => "MA", "B.Sc" => "BSC", "M.sc" => "MSC",
                   "B.Com" => "BCOM", "M.Com" => "MCOM", "Diplomo" => "DIPLOMO", "B.E/B.Tech" => "BE/BTECH",
                   "BCA" => "BCA", "MCA" => "MCA","BBA" => "BBA", "MBA" => "MBA", "Others" => "OTHERS"}
+
+  has_attached_file :photo, styles: {
+    thumb: "100x100>",
+    small: "400x400>"
+  }
   
-  attr_accessible :first_name, :last_name, :date_of_birth, :date_of_join, :qualification, :address, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :date_of_birth, :date_of_join, 
+    :qualification, :address, :password, :password_confirmation, :photo
 
   alias_attribute :dob, :date_of_birth
   alias_attribute :doj, :date_of_join
@@ -20,9 +26,9 @@ class Member < ActiveRecord::Base
 
   before_save { self.qualification = self.qualification.downcase }
 
-  has_many :credits
-  has_many :debits
-  has_many :repayments
+  has_many :credits, dependent: :destroy
+  has_many :debits, dependent: :destroy
+  has_many :repayments, dependent: :destroy
 
   def self.authenticate(username, password)
     member = find_by_first_name(username)

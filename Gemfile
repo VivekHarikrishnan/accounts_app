@@ -9,6 +9,7 @@ gem 'rails', '3.2.6'
 gem 'mysql2'
 gem 'tabs_on_rails'
 gem 'haml-rails'
+gem 'paperclip'
 
 group :development, :test do
   gem 'rspec-rails'
